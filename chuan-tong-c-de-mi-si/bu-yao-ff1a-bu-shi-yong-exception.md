@@ -18,10 +18,9 @@ exception 最常拿出來和`return error`做比較的分別是下面 2 點
 
 exception 並不是也不等價return error，要記住：
 
-* 
-##### Reference
+* ##### Reference
+* [Wiki: Fail-fast](https://en.wikipedia.org/wiki/Fail-fast)
 
-* [Wiki: Fail-fasr](https://en.wikipedia.org/wiki/Fail-fast)
 * [Google C++ Style: Exception](https://google.github.io/styleguide/cppguide.html#Exceptions)
 
 

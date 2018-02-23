@@ -21,6 +21,35 @@ exception 並不是也不等價return error，要記住：
 * exception 是無法被 library 處理才丟出來的
 * 不是所有的 exception 都要 catch，這是錯誤用法，而且會降低效能
 
+##### Zero Cost
+
+* 假設
+  * `doSomeThing()`在任何情況下執行的時間都一樣
+  * error handling 做的事情都一樣
+* 沒有 error 的時候
+  * `return_error_style()`因為還要多執行 \#2 的檢查，所以速度較慢
+* 有 error 的時候
+  * try\_catch\_style\(\) 比較慢
+
+```cpp
+int return_error_style()
+{
+    int ret = doSomeThing();  //  #1
+    if (ret) {                //  #2
+        // error handling
+    }
+}
+
+int try_catch_style()
+{
+    try {
+        doSomeThing();        //  #3
+    } catch (...) {           //  #4
+        // error handling
+    }
+}
+```
+
 ##### Reference
 
 * [Wiki: Fail-fast](https://en.wikipedia.org/wiki/Fail-fast)
@@ -28,6 +57,8 @@ exception 並不是也不等價return error，要記住：
 * [Google C++ Style: Exception](https://google.github.io/styleguide/cppguide.html#Exceptions)
 
 * [敏捷式例外處理設計的第一步：決定例外處理等級](http://teddy-chen-tw.blogspot.tw/2010/03/blog-post_13.html)
+
+* [Exception Handling in LLVM: Zero-cost Exception Handling](https://llvm.org/docs/ExceptionHandling.html#itanium-abi-zero-cost-exception-handling)
 
 
 

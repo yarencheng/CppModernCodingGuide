@@ -1,7 +1,7 @@
 # RAII
 
 * 在物件導向語言中，RAII 是一個很常見的概念。
-* C++ 要求所有資源的 **獲取** 或 **釋放** 都必須在 **建構子** 或 **解構子** 裡面完成，例如：`fopen` / `fclose`、`lock `/ `unlock`、`new `/ `delete`。
+* C++ 要求所有資源的 **獲取** 或 **釋放** 都必須在 **建構子** 或 **解構子** 裡面完成，例如：`fopen` / `fclose`、`lock`/ `unlock`、`new`/ `delete`。
 
 ---
 
@@ -39,6 +39,11 @@ void access_critical_section()
     unsafe_code();
 }
 ```
+
+##### Reference
+
+* [Wiki: RAII](https://zh.wikipedia.org/wiki/RAII)
+* [C++ Core Guidelines: RAII](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-raii)
 
 
 

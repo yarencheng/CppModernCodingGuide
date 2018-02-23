@@ -43,6 +43,7 @@ void access_critical_section()
 ##### Reference
 
 * [Wiki: RAII](https://zh.wikipedia.org/wiki/RAII)
+* Effective C++:  Chapter 3 Resource Management
 * [C++ Core Guidelines: RAII](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-raii)
 * [cppreference: std::lock\_guard](http://en.cppreference.com/w/cpp/thread/lock_guard)
 

@@ -12,11 +12,11 @@
 void fn()
 {
     int x = 123;
-    
+
     //
     // ... some stuff ...
     //
-    
+
     x++; // 在這裡才使用 x
 }
 ```
@@ -68,6 +68,10 @@ void fn ()
     }
 }
 ```
+
+Reference
+
+* [C++ Core Guidelines: Don't: All declarations should be at the top of a function](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#nr1-dont-all-declarations-should-be-at-the-top-of-a-function)
 
 
 

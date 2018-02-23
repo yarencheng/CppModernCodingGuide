@@ -18,10 +18,16 @@ exception 最常拿出來和`return error`做比較的分別是下面 2 點
 
 exception 並不是也不等價return error，要記住：
 
-* ##### Reference
+* exception 是無法被 library 處理才丟出來的
+* 不是所有的 exception 都要 catch，這是錯誤用法，而且會降低效能
+* 
+##### Reference
+
 * [Wiki: Fail-fast](https://en.wikipedia.org/wiki/Fail-fast)
 
 * [Google C++ Style: Exception](https://google.github.io/styleguide/cppguide.html#Exceptions)
+
+* [敏捷式例外處理設計的第一步：決定例外處理等級](http://teddy-chen-tw.blogspot.tw/2010/03/blog-post_13.html)
 
 
 

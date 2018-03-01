@@ -57,7 +57,7 @@ f(make_unique<Foo>(), bar());
 
 ---
 
-#### `shared_ptr`、`unique_ptr`、`weak_ptr`之間的關係
+#### `unique_ptr`v.s.`weak_ptr`之間的關係
 
 ```
 

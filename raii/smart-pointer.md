@@ -57,13 +57,147 @@ f(make_unique<Foo>(), bar());
 
 ---
 
-#### `unique_ptr`v.s.`weak_ptr`之間的關係
+#### `unique_ptr`v.s.`shared_ptr`的不同點
+
+前者不允許 copy 後者可以
+
+```cpp
+unique_ptr<int> u1 = make_unique<int>(123);
+
+unique_ptr<int> u2 = u1; // compiler error
+
+
+shared_ptr<int> s1 = make_shared<int>(123);
+
+shared_ptr<int> s2 = s1; // OK
+```
+
+`shared_ptr`會在沒有人使用的時候去釋放資源
+
+```cpp
+void fn()
+{
+    shared_ptr<int> s1 = make_shared<int>(123); // use count = 1
+    
+    if (...) {
+    
+        shared_ptr<int> s2 = s1 // use count = 2
+        
+        // ...
+        
+    } // use count = 1
+
+    // ...
+    
+} // use  count = 0 ，delete int
+```
+
+---
+
+#### 使用`weak_ptr`避免`shared_ptr`因為循環\(cycles\)導致的問題
+
+```cpp
+class A {
+public:
+    shared_ptr<B> _b;
+}
+
+class B {
+public:
+    shared_ptr<A> _a;
+}
+
+void bad()
+{
+    shared_ptr<A> a = make_shared<A>(); // A 的 use count = 1
+    
+    shared_ptr<B> b = make_shared<B>(); // B 的 use count = 1
+    
+    a._b = b; // B 的 reference count = 2
+    
+    b._a = a; // A 的 reference count = 2
+    
+} //      a 執行 deconstructor 的時候發現 A 的 use count = 1，不 delete A
+  // 同理 b 執行 deconstructor 的時候發現 B 的 use count = 1，不 delete B
+```
+
+改用`weak_ptr`雖然還是有循環\(cycles\)但是不會 leak
+
+```cpp
+class A {
+public:
+    weak_ptr<B> _b;
+}
+
+class B {
+public:
+    weak_ptr<A> _a;
+}
+
+void good()
+{
+    shared_ptr<A> a = make_shared<A>(); // A 的 use count = 1
+    
+    shared_ptr<B> b = make_shared<B>(); // B 的 use count = 1
+    
+    a._b = b; // B 的 use count = 1
+    
+    b._a = a; // A 的 use count = 1
+    
+}  // safe
 
 ```
 
+可以的話，應該先避免循環\(cycles\)，而不是直接使用`weak_ptr`。
+
+---
+
+#### 如果沒有要操作指標的擁有關係，使用`T*`或是`T&`來當作參數，而不是直接使用smart pointer當作參數
+
+```cpp
+void bad(shared_ptr<T> t)
+{
+    use(*t);
+}
+
+void bad_also(shared_ptr<T>& t)
+{
+    use(*t);
+}
+
+
+void good(T* t)
+{
+    use(*t);
+}
+
+void even_better(T& t)
+{
+    use(t)
+}
 ```
 
-ss
+除非是以下情況，否則不應該使用 smart pointer 當作參數
+
+```cpp
+// 只能在要轉移指標擁有權的時候
+void fn(unique_ptr<T> t)
+{
+    unique_ptr<T> another_t(std::move(t));
+    
+    ...
+}
+
+// 分享擁有關係
+void fn(shared_ptr<T> t)
+{
+    shared_ptr<T> another_t = t;
+    
+    ...
+}
+```
+
+dd
 
 ---
 
@@ -72,6 +206,8 @@ ss
 * [Wiki: Smart Pointer](https://en.wikipedia.org/wiki/Smart_pointer)
 * [C++ Core Guidelines: Use make\_unique\(\) to construct objects owned by unique\_ptr](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rh-make_unique)
 * [C++ Core Guidelines: Use`unique_ptr`or`shared_ptr`to avoid forgetting to`delete`objects created using`new`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rh-smart)
+* [C++ Core Guidelines: Use`std::weak_ptr`to break cycles of`shared_ptr`s](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-weak_ptr)
+* [C++ Core Guidelines: For general use, take`T*`or`T&`arguments rather than smart pointers](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rf-smart)
 
 
 

@@ -13,7 +13,7 @@ void bad_example()
 
     // ...
 
-    delete t; // bad
+    delete t; // bad, 因為可能不會被執行
 
     // ...
 }
@@ -23,6 +23,7 @@ void good_example()
     unique_ptr<T> t = unique_ptr<T>(new T()); // good
 
     // ...
+
 }// 在離開 scope 的時候，unique_ptr 會執行 delete t 的動作
 ```
 
@@ -78,17 +79,17 @@ shared_ptr<int> s2 = s1; // OK
 void fn()
 {
     shared_ptr<int> s1 = make_shared<int>(123); // use count = 1
-    
+
     if (...) {
-    
+
         shared_ptr<int> s2 = s1 // use count = 2
-        
+
         // ...
-        
+
     } // use count = 1
 
     // ...
-    
+
 } // use  count = 0 ，delete int
 ```
 
@@ -110,13 +111,13 @@ public:
 void bad()
 {
     shared_ptr<A> a = make_shared<A>(); // A 的 use count = 1
-    
+
     shared_ptr<B> b = make_shared<B>(); // B 的 use count = 1
-    
+
     a._b = b; // B 的 reference count = 2
-    
+
     b._a = a; // A 的 reference count = 2
-    
+
 } //      a 執行 deconstructor 的時候發現 A 的 use count = 1，不 delete A
   // 同理 b 執行 deconstructor 的時候發現 B 的 use count = 1，不 delete B
 ```
@@ -137,15 +138,14 @@ public:
 void good()
 {
     shared_ptr<A> a = make_shared<A>(); // A 的 use count = 1
-    
-    shared_ptr<B> b = make_shared<B>(); // B 的 use count = 1
-    
-    a._b = b; // B 的 use count = 1
-    
-    b._a = a; // A 的 use count = 1
-    
-}  // safe
 
+    shared_ptr<B> b = make_shared<B>(); // B 的 use count = 1
+
+    a._b = b; // B 的 use count = 1
+
+    b._a = a; // A 的 use count = 1
+
+}  // safe
 ```
 
 可以的話，應該先避免循環\(cycles\)，而不是直接使用`weak_ptr`。
@@ -180,24 +180,52 @@ void even_better(T& t)
 除非是以下情況，否則不應該使用 smart pointer 當作參數
 
 ```cpp
-// 只能在要轉移指標擁有權的時候
+// fn 要轉移指標擁有權的時候，fn 不使用 t
 void fn(unique_ptr<T> t)
 {
     unique_ptr<T> another_t(std::move(t));
-    
+
     ...
 }
 
-// 分享擁有關係
+// 分享擁有關係，fn 不使用 t
 void fn(shared_ptr<T> t)
 {
     shared_ptr<T> another_t = t;
-    
+
+    ...
+}
+
+// 重新指向另一個物件，fn 不使用 t
+void fn(unique_ptr<T>& t)
+{
+    t = make_unique<T>(...)
+
+    ...
+}
+
+// 重新指向另一個物件，fn 不使用 t
+void fn(shared_ptr<T>& t)
+{
+    t = shared_ptr<T>(...)
+
     ...
 }
 ```
 
-dd
+---
+
+#### 總結：使用時機
+
+當要使用 smart pointer 的時候，應該要
+
+1. 先考慮使用`unique_ptr`，
+2. 如果指標會在多個地分被分享使用，才可以使用`shared_ptr`，
+3. 當使用`shared_ptr`產生循環\(cycles\)時，可以考慮使用`weak_ptr`。
+
+---
+
+TBD
 
 ---
 
@@ -208,6 +236,8 @@ dd
 * [C++ Core Guidelines: Use`unique_ptr`or`shared_ptr`to avoid forgetting to`delete`objects created using`new`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rh-smart)
 * [C++ Core Guidelines: Use`std::weak_ptr`to break cycles of`shared_ptr`s](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-weak_ptr)
 * [C++ Core Guidelines: For general use, take`T*`or`T&`arguments rather than smart pointers](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rf-smart)
+* [C++ Core Guidelines: Take a`unique_ptr<widget>&`parameter to express that a function reseats the`widget`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-reseat)
+* [C++ Core Guidelines: Take a`shared_ptr<widget>&`parameter to express that a function might reseat the shared pointer](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-sharedptrparam)
 
 
 

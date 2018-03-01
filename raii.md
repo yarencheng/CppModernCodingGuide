@@ -1,7 +1,11 @@
 # RAII
 
-* 在物件導向語言中，RAII 是一個很常見的概念。
+* 於 1984-1989 在設計 C++ 的 exception-safe 和 resource-management 的時候被提出
 * C++ 要求所有資源的 **獲取** 或 **釋放** 都必須在 **建構子** 或 **解構子** 裡面完成，例如：`fopen` / `fclose`、`lock`/ `unlock`、`new`/ `delete`。
+* 大部份的`std`函式庫都已經遵照 RAII 實做，例如`std::string`、`std::vector`、`std::thread`。
+* 滿足 RAII 的 class 必須將資源封裝到 class 管理，其中
+  * 建構子，constructor，負責獲取資源，如果無法獲得資原則拋出 exception
+  * 解構子，destructor，負責釋放資源，不疼拋出 exception
 
 ---
 

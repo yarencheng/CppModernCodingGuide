@@ -73,7 +73,7 @@ shared_ptr<int> s1 = make_shared<int>(123);
 shared_ptr<int> s2 = s1; // OK
 ```
 
-`shared_ptr`會在沒有人使用的時候去釋放資源
+`shared_ptr`會記綠use count，並且在沒有人使用的時候去釋放資源
 
 ```cpp
 void fn()

@@ -220,7 +220,7 @@ void fn(shared_ptr<T>& t)
 當要使用 smart pointer 的時候，應該要
 
 1. 先考慮使用`unique_ptr`，
-2. 如果指標會在多個地分被分享使用，才可以使用`shared_ptr`，
+2. 如果指標同時會被多個物件分享使用，才可以使用`shared_ptr`，
 3. 當使用`shared_ptr`產生循環\(cycles\)時，可以考慮使用`weak_ptr`。
 
 ---

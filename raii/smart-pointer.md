@@ -1,6 +1,6 @@
 # Smart Pointer
 
-智慧指標，C++11 提供`shared_ptr`、`unique_ptr`、`week_ptr`等抽象資料類別，使用 template 來達成自動釋放指標所指向的記憶體或物件。
+智慧指標，C++11 提供`shared_ptr`、`unique_ptr`、`weak_ptr`等抽象資料類別，使用 template 來達成自動釋放指標所指向的記憶體或物件。
 
 ---
 
@@ -10,18 +10,18 @@
 void bad_example()
 {
     T* t = new T(); // bad
-    
+
     // ...
-    
+
     delete t; // bad
-    
+
     // ...
 }
 
 void good_example()
 {
     unique_ptr<T> t = unique_ptr<T>(new T()); // good
-    
+
     // ...
 }// 在離開 scope 的時候，unique_ptr 會執行 delete t 的動作
 ```
@@ -57,9 +57,13 @@ f(make_unique<Foo>(), bar());
 
 ---
 
-####  `shared_ptr`、`unique_ptr`、`week_ptr`之間的關係
+#### `shared_ptr`、`unique_ptr`、`weak_ptr`之間的關係
 
+```
 
+```
+
+ss
 
 ---
 

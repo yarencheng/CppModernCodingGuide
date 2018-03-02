@@ -140,7 +140,7 @@ destructor、copy constructor、copy assignment 任一個被使用者定義出�
 
 ##### Reason
 
-避免使用 compiler 自動產生的程式，導致沒有正常操作資源。
+避免使用 compiler 自動產生的 implicit 程式，導致沒有正常操作資源。
 
 ##### Example, bad
 
@@ -202,7 +202,19 @@ public:
 
 ---
 
-Rule of Five
+#### Rule of Five
+
+如果使用者有自行定義的 move constructor 或是 move assignment，那麼前面兩個和 destructor、copy-constructor、copy-assignment 共五個必須同時被使用者自行定義。
+
+##### Reason
+
+避免使用 compiler 自動產生的 implicit 程式，導致沒有正常操作資源。
+
+---
+
+
+
+Destructors, swap functions, move operations, and default constructors should never throw.
 
 aa
 

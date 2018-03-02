@@ -128,17 +128,87 @@ public:
     int a = 123;
     unique_ptr<int> b = make_unique<int>(456);
 }
+```
+
+使用 in-class member initializers 並且讓 compiler 自動產生 default constructor。
+
+---
+
+#### Rule of three
+
+destructor、copy constructor、copy assignment 任一個被使用者定義出來的時候，這三個必須同時都被使用者定義。
+
+##### Reason
+
+避免使用 compiler 自動產生的程式，導致沒有正常操作資源。
+
+##### Example, bad
+
+```cpp
+class Bad {
+public:
+    int* i;
+    Bad() {
+        i= new int(123);
+    }
+    ~Bad() {
+        delete i;
+    }
+}
 
 void fn()
 {
-    Bad bad;
-    cout << "bad  = " << bad.a << " " << *(bad.b) << endl;
+    Bad b1;    // 執行 user-defined default constructor Bad::Bad()，並且 allocate i
     
-    Good good;
-    cout << "good = " << good.a << " " << *(bad.b) << endl;
+    Bad b2(b1) // 執行 implicit copy constructor Bad::Bad(const Bad&)
+               // 指標 b1.i 和 b2.i 指到一樣的位置
+           
+} // 離開 fn()，執行 user-defined destructor 2 次，造成 double free
+```
 
+##### Example, good
+
+```cpp
+class Good {
+public:
+    int* i;
+    Good () {
+        i= new int(123);
+    }
+    ~Good () {
+        delete i;
+    }
+    Good (const Good& other) {
+        i= new int(*(other.i));
+    }
+    Good& operator=(const Good& other) {
+        i= new int(*(other.i));
+    }
+}
+
+class GoodAlso {
+public:
+    int* i;
+    GoodAlso () {
+        i= new int(123);
+    }
+    ~GoodAlso () {
+        delete i;
+    }
+    GoodAlso (const Good& other) = delete;
+    GoodAlso & operator=(const Good& other) = delete;
 }
 ```
+
+---
+
+Rule of Five
+
+
+
+aa
+
+
 
 ---
 
@@ -149,6 +219,7 @@ void fn()
 * [cppreference.com: Move constructors](http://en.cppreference.com/w/cpp/language/move_constructor)
 * [C++ Core Guidelines: Constructors, assignments, and destructors](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#S-ctor)
 * [C++ Core Guidelines: If you can avoid defining default operations, do](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rc-zero)
+* [C++ Core Guidelines: Don't define a default constructor that only initializes data members; use in-class member initializers instead](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c45-dont-define-a-default-constructor-that-only-initializes-data-members-use-in-class-member-initializers-instead)
 
 
 

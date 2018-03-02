@@ -68,7 +68,7 @@ public:
 
 ```cpp
 class A {
-    
+
 };
 
 class B {
@@ -111,18 +111,33 @@ void fn()
 如果可以的話，盡量不要宣告任何的 special member function，理由如下：
 
 * 避免因為不當維護資源造成 leak
-* 請相信 compiler 比你強
+* 大部分情況編譯器，請相信 compiler 比你強
 
-Example: 多餘的 default constructor
+##### Example: 多餘的 default constructor
 
 ```cpp
-class Bad{
+class Bad {
 public:
     int a;
     unique_ptr<int> b;
-    Bad() : a(123), b(make_unique<int>(456)) {}
+    Bad() : a(123), b(make_unique<int>(456)) {} // redundant
+};
+
+class Good {
+public:
+    int a = 123;
+    unique_ptr<int> b = make_unique<int>(456);
 }
 
+void fn()
+{
+    Bad bad;
+    cout << "bad  = " << bad.a << " " << *(bad.b) << endl;
+    
+    Good good;
+    cout << "good = " << good.a << " " << *(bad.b) << endl;
+
+}
 ```
 
 ---

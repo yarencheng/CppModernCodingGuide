@@ -216,6 +216,8 @@ Destructors, swap functions, move operations, and default constructors should ne
 
 C.67: A base class should suppress copying, and provide a virtual clone instead if "copying" is desired
 
+Make base class destructors public and virtual, or protected and nonvirtual
+
 aa
 
 ---

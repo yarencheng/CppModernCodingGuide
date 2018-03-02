@@ -212,9 +212,9 @@ public:
 
 ---
 
-
-
 Destructors, swap functions, move operations, and default constructors should never throw.
+
+C.67: A base class should suppress copying, and provide a virtual clone instead if "copying" is desired
 
 aa
 

@@ -212,6 +212,41 @@ public:
 
 ---
 
+#### Base class 的 Destructor 必須是 public 且 virtual，或者是 protected 且 nonvirtual
+
+##### Example, bad
+
+```cpp
+class Base {
+public:
+    ~Base () { // free something ... }
+};
+
+class Derived{
+public:
+    ~Derived () { // free something ... }
+};
+
+void fn()
+{
+    unique_ptr<Base> base = make_unique<Derived>();
+} // 呼叫 ~Base() 但是沒有 呼叫 ~Derived ()
+```
+
+##### Example, good
+
+```cpp
+class Base {
+public:
+    virtual ~Base () { // free something ... }    // use virtual
+};
+
+class Base final {                                // use final
+public:
+    ~Base () { // free something ... }
+};
+```
+
 Destructors, swap functions, move operations, and default constructors should never throw.
 
 C.67: A base class should suppress copying, and provide a virtual clone instead if "copying" is desired
@@ -230,6 +265,7 @@ aa
 * [C++ Core Guidelines: Constructors, assignments, and destructors](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#S-ctor)
 * [C++ Core Guidelines: If you can avoid defining default operations, do](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rc-zero)
 * [C++ Core Guidelines: Don't define a default constructor that only initializes data members; use in-class member initializers instead](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c45-dont-define-a-default-constructor-that-only-initializes-data-members-use-in-class-member-initializers-instead)
+* [C++ Core Guidelines: A base class destructor should be either public and virtual, or protected and nonvirtual](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c35-a-base-class-destructor-should-be-either-public-and-virtual-or-protected-and-nonvirtual)
 
 
 

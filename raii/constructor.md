@@ -247,7 +247,41 @@ public:
 };
 ```
 
+TODO: example of protected and nonvirtual
+
 ---
+
+#### Destructor 不可以失敗
+
+##### Example, bad
+
+```cpp
+class A{
+    ~A () {
+        ...
+        if (...) {
+            throw exception();
+        }
+        ...
+    }
+}
+```
+
+##### Example, good
+
+destructor 不能丟 exception 而且要標記 noexcept
+
+```
+class A{
+    ~A () noexcept {
+        ...
+        if (...) {
+            std::terminate();
+        }
+        ...
+    }
+}
+```
 
 Destructors, swap functions, move operations, and default constructors should never throw.
 

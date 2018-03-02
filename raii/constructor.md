@@ -40,11 +40,11 @@ void fn() {
 
 class X {
 public: 
-    X& operator=(const X& x) { ... }    // a move constructor
+    X& operator=(const X&& x) { ... }    // a move constructor
 }
 
 void fn() {
-    X x = anotherX;
+    X x(std::move(anotherX));
 }
 
 class X {
@@ -159,10 +159,10 @@ public:
 void fn()
 {
     Bad b1;    // 執行 user-defined default constructor Bad::Bad()，並且 allocate i
-    
+
     Bad b2(b1) // 執行 implicit copy constructor Bad::Bad(const Bad&)
                // 指標 b1.i 和 b2.i 指到一樣的位置
-           
+
 } // 離開 fn()，執行 user-defined destructor 2 次，造成 double free
 ```
 
@@ -204,11 +204,7 @@ public:
 
 Rule of Five
 
-
-
 aa
-
-
 
 ---
 

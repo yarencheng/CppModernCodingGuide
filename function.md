@@ -112,15 +112,15 @@ class HeavyObject{ ... };
 
 void consume(const HeavyObject& o)
 {
-    HeavyObject save_o = o;         // Bad, copy 成本很高
+    HeavyObject save_o(o);         // Bad, 呼叫 HeavyObject(const HeavyObject&) copy 成本很高
 }
 
 void fn()
 {
     HeavyObject o;
-    
+
     consume(o);
-    
+
     // After consume(), o is never used.
 }
 ```
@@ -132,20 +132,22 @@ class HeavyObject{ ... };
 
 void consume(HeavyObject&& o)
 {
-    HeavyObject save_o(std::move(o));         // Bad, copy 成本很高
+    HeavyObject save_o(std::move(o));         // Good, 呼叫 HeavyObject(const HeavyObject&&) 比 copy 快
 }
 
 void fn()
 {
     HeavyObject o;
-    
-    consume(std::move(o));                    // Good
-    
+
+    consume(std::move(o));
+
     // o 不可以再被使用
-    
+
     // After consume(), o is never used.
 }
 ```
+
+注意：不是因為`std::move`讓`o`無法使用，是因為建立`save_o`的時候會呼叫`HeavyObject(const HeavyObject&&)`導致的。
 
 ---
 

@@ -12,30 +12,31 @@ TODO: example
 
 #### 如果要 join thread，考慮使用`gsl::joining_thread`
 
-##### Example, bad
+##### Example
 
 ```cpp
-static void * thread_start(void *arg) { ... }
+void f() { std::cout << "Hello "; }
 
 void bad()
 {
-    pthread_t thread_id;
-    
-    pthread_create(&thread_id, NULL, &thread_start, NULL);
-    
-    pthread_join(thread_id, NULL);
-    
-    
-}
-```
+    std::thread thread{f};
 
-s
+    thread.join()            // Bad, 可能沒有join
+}
+
+void good()
+{
+    gsl::joining_thread thread{f};
+    
+} // Good, 自動 join
+```
 
 ---
 
 #### Reference
 
 * [cppreference.com: std::thread](http://en.cppreference.com/w/cpp/thread/thread)
+* [C++ Core Guidelines: Prefer`gsl::joining_thread`over`std::thread`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rconc-joining_thread)
 
 
 

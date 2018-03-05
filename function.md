@@ -155,8 +155,7 @@ void fn()
 
 * [C++ Core Guidelines: If your function may not throw, declare it`noexcept`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rf-noexcept)
 * [cppreference.com: Copy elision](http://en.cppreference.com/w/cpp/language/copy_elision)
-* \[stackoverFlow: What are copy elision and return value optimization?
-  \]\([https://stackoverflow.com/questions/12953127/what-are-copy-elision-and-return-value-optimization](https://stackoverflow.com/questions/12953127/what-are-copy-elision-and-return-value-optimization)\)
+* [stackoverFlow: What are copy elision and return value optimization?](https://stackoverflow.com/questions/12953127/what-are-copy-elision-and-return-value-optimization)
 
 
 

@@ -132,7 +132,7 @@ struct A callee()
 void caller()
 {
     auto [ val1, val2 ] = callee();
-    
+
     cout << val1 << endl;
     cout << val2 << endl;
 }
@@ -193,6 +193,7 @@ void fn()
 #### Reference
 
 * [C++ Core Guidelines: If your function may not throw, declare it`noexcept`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rf-noexcept)
+* [C++ Core Guidelines: To return multiple "out" values, prefer returning a tuple or struct](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rf-out-multi)
 * [cppreference.com: Copy elision](http://en.cppreference.com/w/cpp/language/copy_elision)
 * [stackoverFlow: What are copy elision and return value optimization?](https://stackoverflow.com/questions/12953127/what-are-copy-elision-and-return-value-optimization)
 

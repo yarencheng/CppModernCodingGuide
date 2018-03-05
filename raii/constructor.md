@@ -214,7 +214,7 @@ public:
 
 ---
 
-#### Base class 的 Destructor 必須是 public 且 virtual，或者是 protected 且 nonvirtual
+#### Base class 的 Destructor 必須是 public 且 virtual，或者是 protected 且 nonvirtual {#base-class-destructor}
 
 ##### Example, bad
 

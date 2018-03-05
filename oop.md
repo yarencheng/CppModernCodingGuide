@@ -80,15 +80,37 @@ class Squar: public Shape { ... };
 3. 需要更多三角形功能，部分功能和 Circle 相似，所以Triangle 繼承自 Circle
 4. ... 繼續下去
 
-這樣會導致很多種問題，最直接的問題\(和單元測試有關\)就是無法抽換，
+這樣會導致很多種問題，例如：
 
+* 每增加一個新的 class，可能需要增加邏輯到 Shape 裡面。
+* 因為三角形沒有半徑，所以 Triangle 在實作的時候必須設法修改掉這部分。
 
+如果系統複雜，class 種類多的時候，最好先定義 interface\(pure abstract class\)：
 
+```
+ShapeI   <-   CircleI     <-   笑臉I
+         <-   TriangleI   <-   等腰三角形I
+                          <-   值角三角形I
+```
 
+再實作
+
+```
+ShapeI   <-   CircleI     <-   Impl.Circle
+                          <-   笑臉I         <-   Impl.笑臉                        
+         <-   TriangleI   <-   Impl.Triangle
+                          <-   等腰三角形I    <-   Impl.等腰三角形
+                          <-   直角三角形I    <-   Impl.直角三角形
+```
+
+如果發現有些功能重複，可以把重複部分抽成 abstract class
+
+```
+TriangleI   <-   Impl.Triangle
+
+```
 
 這樣其實有很多缺點，例如
-
-
 
 C.129: When designing a class hierarchy, distinguish between implementation inheritance and interface inheritance
 

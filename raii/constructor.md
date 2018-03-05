@@ -97,7 +97,8 @@ public:
 
 void fn()
 {
-    A a;        // compile error, an implicit A::A() is not defined since another constructor exists
+    A a;        // compile error, an implicit A::A() is not 
+                // defined since another constructor exists
     B b;        // OK
 }
 ```
@@ -158,7 +159,8 @@ public:
 
 void fn()
 {
-    Bad b1;    // 執行 user-defined default constructor Bad::Bad()，並且 allocate i
+    Bad b1;    // 執行 user-defined default constructor Bad::Bad()
+               // 並且 allocate i
 
     Bad b2(b1) // 執行 implicit copy constructor Bad::Bad(const Bad&)
                // 指標 b1.i 和 b2.i 指到一樣的位置

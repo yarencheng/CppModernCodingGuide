@@ -60,7 +60,7 @@ class Squar: public Shape { ... };
 
 #### Interface 必須有 virtual destructor
 
-道理和[Base class 的 Destructor 必須是 public 且 virtual，或者是 protected 且 nonvirtual](/raii/constructor.md/base-class-destructor)一樣。
+道理和[Base class 的 Destructor 必須是 public 且 virtual，或者是 protected 且 nonvirtual](/raii/constructor.md#base-class-destructor)一樣。
 
 C.129: When designing a class hierarchy, distinguish between implementation inheritance and interface inheritance
 

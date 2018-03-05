@@ -50,8 +50,6 @@ void fn(vector<int>& v1, vector<int>& v2);// BAD, 哪一個是 output ?
 void fn(int&); // BAD, overhead
 ```
 
-Example, good, since 
-
 ##### Copy elision
 
 ```cpp
@@ -93,6 +91,51 @@ A copy was made.
 
 ```
 Hello World!
+```
+
+---
+
+#### 回傳多的  output
+
+##### Example, C++11 可以使用`tuple`
+
+```cpp
+std::tuple<double, char, std::string> callee()
+{
+    std::make_tuple(3.8, 'A', "Lisa Simpson");
+}
+
+void caller()
+{
+    auto o = callee();
+
+    cout << std::get<0>(o) << endl;
+    cout << std::get<1>(o) << endl;
+    cout << std::get<2>(o) << endl;
+}
+```
+
+##### Example, C++17 可以使用 Structured binding declarations
+
+```cpp
+struct A {
+    int i;
+    bool b;
+};
+
+struct A callee()
+{
+    struct A a = { 123, true };
+    return a;
+}
+
+void caller()
+{
+    auto [ val1, val2 ] = callee();
+    
+    cout << val1 << endl;
+    cout << val2 << endl;
+}
 ```
 
 ---

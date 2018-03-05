@@ -5,8 +5,8 @@
   * [Smart Pointer](raii/smart-pointer.md)
   * [Mutex & Lock](raii/mutex-and-lock.md)
   * [IO](raii/io.md)
-  * Thread
-  * Legacy C code
+  * [Thread](raii/thread.md)
+  * [Legacy C code](raii/legacy-c-code.md)
 * [Constructors, Assignments, and Destructors](raii/constructor.md)
 * [傳統 C 的迷思](chuan-tong-c-de-mi-si.md)
   * [不要：宣告所有變數在 function 開頭](chuan-tong-c-de-mi-si/bu-yao-ff1a-xuan-gao-suo-you-bian-shu-zai-function-kai-tou.md)

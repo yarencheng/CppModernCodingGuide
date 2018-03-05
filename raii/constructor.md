@@ -309,7 +309,7 @@ public:
 void fn()
 {
     auto b = make_unique<B>();
-    
+
     // 呼叫 A::A(const A&) 導致 b.more_data 遺失
     auto a = make_unique<A>(b);
 }
@@ -330,6 +330,12 @@ class B: public A {
 public:
     int more_data;
     unique_ptr<A> clone() override { return /* B object */; }
+}
+
+void fn()
+{
+    auto b = make_unique<B>();
+    auto a = b->clone(); // ok, deep clone
 }
 ```
 

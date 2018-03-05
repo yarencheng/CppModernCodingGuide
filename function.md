@@ -35,9 +35,81 @@ void fn(const string& s); // OK
 
 ---
 
+#### 使用 return value 比使用 output parameter 更好
+
+使用 return value
+
+* 可讀性高
+* C++11 後編譯器會作最佳化，不會有因為 copy 或 move 造成的效率問題。
+
+##### Example, bad
+
+```cpp
+void fn(vector<int>& v1, vector<int>& v2) // BAD, 哪一個是 output
+{
+
+}
+
+void fn(int&) // BAD, overhead
+{
+
+}
+```
+
+##### Copy elision
+
+```cpp
+class T {};
+
+T x = T(T(T())); // 只會呼叫一次 constructor
+```
+
+每個編譯器最佳化的方式可能會不一樣，例如下面的程式，用不同的編譯器會造成不同的結果
+
+```cpp
+struct C {
+  C() {}
+  C(const C&) { std::cout << "A copy was made.\n"; }
+};
+
+C f() {
+  return C();
+}
+
+int main() {
+  std::cout << "Hello World!\n";
+  C obj = f();
+}
+```
+
+可能的結果
+
+```cpp
+Hello World! 
+A copy was made. 
+A copy was made. 
+```
+
+```
+Hello World! 
+A copy was made. 
+```
+
+```
+Hello World! 
+```
+
+---
+
+ss
+
+---
+
 #### Reference
 
 * [C++ Core Guidelines: If your function may not throw, declare it`noexcept`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rf-noexcept)
+* [cppreference.com: Copy elision](http://en.cppreference.com/w/cpp/language/copy_elision)
+* [stackoverFlow: What are copy elision and return value optimization?  ](https://stackoverflow.com/questions/12953127/what-are-copy-elision-and-return-value-optimization)
 
 
 

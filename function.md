@@ -45,16 +45,12 @@ void fn(const string& s); // OK
 ##### Example, bad
 
 ```cpp
-void fn(vector<int>& v1, vector<int>& v2) // BAD, 哪一個是 output
-{
+void fn(vector<int>& v1, vector<int>& v2);// BAD, 哪一個是 output ?
 
-}
-
-void fn(int&) // BAD, overhead
-{
-
-}
+void fn(int&); // BAD, overhead
 ```
+
+Example, good, since 
 
 ##### Copy elision
 

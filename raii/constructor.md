@@ -253,7 +253,7 @@ TODO: example of protected and nonvirtual
 
 ---
 
-#### Destructor 不可以失敗
+#### Destructor 不可以拋出例外
 
 ##### Example, bad
 
@@ -285,11 +285,55 @@ class A{
 }
 ```
 
-Destructors, swap functions, move operations, and default constructors should never throw.
+除了 destructors 以外，swap functions、move operations、還有 default constructors 也不應該拋出例外.
 
-C.67: A base class should suppress copying, and provide a virtual clone instead if "copying" is desired
+---
 
-Make base class destructors public and virtual, or protected and nonvirtual
+#### Base Class 應該禁止 "被複製"，如果非要不可的話，提供 virtual copy。
+
+如果沒有禁止，child class 的資料可能會消失\(slicing\)。
+
+##### Example, bad
+
+```cpp
+class A {
+public:
+    int data;
+};
+
+class B: public A {
+public:
+    int more_data;
+}
+
+void fn()
+{
+    auto b = make_unique<B>();
+    
+    // 呼叫 A::A(const A&) 導致 b.more_data 遺失
+    auto a = make_unique<A>(b);
+}
+```
+
+##### Example, good
+
+```cpp
+class A {
+public:
+    int data;
+    A(const A&) = delete;
+    A& operator(const A&) = delete;
+    virtual unique_ptr<A> clone() { return /* A object */; }
+};
+
+class B: public A {
+public:
+    int more_data;
+    unique_ptr<A> clone() override { return /* B object */; }
+}
+```
+
+---
 
 aa
 
@@ -304,6 +348,7 @@ aa
 * [C++ Core Guidelines: If you can avoid defining default operations, do](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rc-zero)
 * [C++ Core Guidelines: Don't define a default constructor that only initializes data members; use in-class member initializers instead](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c45-dont-define-a-default-constructor-that-only-initializes-data-members-use-in-class-member-initializers-instead)
 * [C++ Core Guidelines: A base class destructor should be either public and virtual, or protected and nonvirtual](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c35-a-base-class-destructor-should-be-either-public-and-virtual-or-protected-and-nonvirtual)
+* [C++ Core Guidelines: A base class should suppress copying, and provide a virtual`clone`instead if "copying" is desired](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c67-a-base-class-should-suppress-copying-and-provide-a-virtual-clone-instead-if-copying-is-desired)
 
 
 

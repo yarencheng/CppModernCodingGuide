@@ -103,9 +103,49 @@ Hello World!
 
 #### 使用`T&&`來增進效率
 
-如果某個參數給 function 使用後就不再被其他人使用，可以使用T&&來增進效率
+如果某個參數給 function 使用後就不再被其他人使用，可以使用`T&&`和`std::move`來增進效率。
 
-ss
+##### Example, bad
+
+```cpp
+class HeavyObject{ ... };
+
+void consume(const HeavyObject& o)
+{
+    HeavyObject save_o = o;         // Bad, copy 成本很高
+}
+
+void fn()
+{
+    HeavyObject o;
+    
+    consume(o);
+    
+    // After consume(), o is never used.
+}
+```
+
+##### Example, good
+
+```cpp
+class HeavyObject{ ... };
+
+void consume(HeavyObject&& o)
+{
+    HeavyObject save_o(std::move(o));         // Bad, copy 成本很高
+}
+
+void fn()
+{
+    HeavyObject o;
+    
+    consume(std::move(o));                    // Good
+    
+    // o 不可以再被使用
+    
+    // After consume(), o is never used.
+}
+```
 
 ---
 

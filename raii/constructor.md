@@ -58,7 +58,7 @@ void fn() {
 
 class X {
 public: 
-    ~X { ... }                         // a destructor
+    ~X() { ... }                         // a destructor
 }
 ```
 
@@ -273,7 +273,7 @@ class A{
 
 destructor 不能丟 exception 而且要標記 noexcept
 
-```
+```cpp
 class A{
     ~A () noexcept {
         ...

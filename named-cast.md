@@ -53,7 +53,7 @@ void good(B* pb)
 
 #### Reference
 
-* [cppreference.com: If you must use a cast, use a named cast](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Res-casts-named)
+* C++ Core Guidelines: [cppreference.com: If you must use a cast, use a named cast](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Res-casts-named)
 
 
 

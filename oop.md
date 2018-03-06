@@ -89,13 +89,42 @@ virtual  Color              Shape::getColor() = 0;
 virtual  Impl::Color  Impl::Shape::getColor() { ... };
 ```
 
+---
 
+#### 避免 protected data
+
+原因：
+
+* 當 class 階層很多時，太多的 protected data 很難維護
+* 操作同一個 protected data 的邏輯分散在很多 class 之間
+* protected function 可以
 
 ---
 
-Data class 盡量不要有
+#### 不要把每個 function 都宣告成 virtual
 
-C.129: When designing a class hierarchy, distinguish between implementation inheritance and interface inheritance
+* `virtual`會增加執行時間和 code size
+* 除非有理由，例如預期會被 child class override，否則不需要宣告`virtual`。
+
+##### Example
+
+```cpp
+class Interface {
+public:
+    virtual void fn() = 0;              // OK，預期會被修改    
+};
+
+class Implement: public Interface {
+public:
+    void fn() = { ... };                // OK
+    virtual void fn() { ... };          // BAD，可以覆寫，但不要宣告成 virtual
+    virtual void doSomething() { ... }; // BAD，有需要嗎？
+};
+```
+
+---
+
+ss
 
 ---
 
@@ -104,6 +133,8 @@ C.129: When designing a class hierarchy, distinguish between implementation inhe
 * [C++ Core Guidelines: A class with a virtual function should have a virtual or protected destructor](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rc-dtor-virtual)
 * [C++ Core Guidelines: Prefer abstract classes as interfaces to class hierarchies](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Ri-abstract)
 * [C++ Core Guidelines: When designing a class hierarchy, distinguish between implementation inheritance and interface inheritance](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rh-kind)
+* [C++ Core Guidelines: Avoid`protected`data](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rh-protected)
+* [C++ Core Guidelines: Don't make a function virtual without reason](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rh-virtual)
 
 
 

@@ -64,53 +64,36 @@ class Squar: public Shape { ... };
 
 ---
 
-#### Interface 和 implementation 必須分開
+#### 介面和實作必須分開
 
-假設現在有 3 個 class 它們之間的關係是
+如下圖，如果有三個 class 比此之間是有關係，那麼最好：
 
-* Shape：形狀，基本的形狀類別
-* Circle： 圓形，繼承自形狀
-* Triangle：三角形，繼承自圓圈
-* `Shape   <-   Circle   <-   Triangle`
-
-混合 interface 和 implementation 這種繼承方式在早期 \(1980s ~ 1990s\) 很常見，它們發生的時間點順序是
-
-1. 先有 Shape
-2. 需要更多圓形的功能，部份功能和 Shape 相似，所以 Circle 繼承自 Shape
-3. 需要更多三角形功能，部分功能和 Circle 相似，所以Triangle 繼承自 Circle
-4. ... 繼續下去
-
-這樣會導致很多種問題，例如：
-
-* 每增加一個新的 class，可能需要增加邏輯到 Shape 裡面。
-* 因為三角形沒有半徑，所以 Triangle 在實作的時候必須設法修改掉這部分。
-
-如果系統複雜，class 種類多的時候，最好先定義 interface\(pure abstract class\)：
+* 每一個實作都要對應到一個介面
+* dual hierarchy：介面可以繼承，實作也可以繼承
 
 ```
-ShapeI   <-   CircleI     <-   笑臉I
-         <-   TriangleI   <-   等腰三角形I
-                          <-   值角三角形I
+Smiley       ->      Circle   ->    Shape
+  ^                     ^             ^
+  |                     |             |
+Impl::Smiley -> Impl::Circle  -> Impl::Shape
 ```
 
-再實作
+##### Return value 也要有介面
 
-```
-ShapeI   <-   CircleI     <-   Impl.Circle
-                          <-   笑臉I         <-   Impl.笑臉                        
-         <-   TriangleI   <-   Impl.Triangle
-                          <-   等腰三角形I    <-   Impl.等腰三角形
-                          <-   直角三角形I    <-   Impl.直角三角形
-```
+如果是 data class 而且裡面沒有邏輯，可以不用。
 
-如果發現有些功能重複，可以把重複部分抽成 abstract class
-
-```
-TriangleI   <-   Impl.Triangle
-
+```cpp
+virtual  Color              Shape::getColor() = 0;
+          ^                   ^
+          |                   |
+virtual  Impl::Color  Impl::Shape::getColor() { ... };
 ```
 
-這樣其實有很多缺點，例如
+
+
+---
+
+Data class 盡量不要有
 
 C.129: When designing a class hierarchy, distinguish between implementation inheritance and interface inheritance
 

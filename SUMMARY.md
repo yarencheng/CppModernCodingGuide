@@ -8,6 +8,7 @@
   * [Thread](raii/thread.md)
   * [Legacy C code](raii/legacy-c-code.md)
 * [Named Cast](named-cast.md)
+* [auto](auto.md)
 * [Constructors, Assignments, and Destructors](raii/constructor.md)
 * [Function](function.md)
 * [OOP](oop.md)

@@ -1,6 +1,6 @@
 # Named Cast
 
-在 C++ 中避免使用 cast，例如：`A* a = (B*)b`。應該使用 named cast。
+在 C++ 中避免使用 cast，如果要，應該使用 named cast。
 
 ```cpp
 class B { /* ... */ };
@@ -54,6 +54,7 @@ void good(B* pb)
 #### Reference
 
 * C++ Core Guidelines: [cppreference.com: If you must use a cast, use a named cast](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Res-casts-named)
+* [C++ Core Guidelines: Use dynamic\_cast where class hierarchy navigation is unavoidable](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c146-use-dynamic_cast-where-class-hierarchy-navigation-is-unavoidable)
 
 
 

@@ -17,4 +17,7 @@
   * [使用 using 取代 typedef](shi-yong-using-qu-dai-typedef.md)
   * [Enum](enum.md)
 * [傳統 C 的迷思](c-dao-c-++-de-mi-si.md)
+  * [不要：不使用 exception](/chuan-tong-c-de-mi-si/bu-yao-ff1a-bu-shi-yong-exception.md)
+
+
 

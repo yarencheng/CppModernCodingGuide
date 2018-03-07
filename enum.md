@@ -56,7 +56,7 @@ Print_color(0);                  // Error
 
 #### Reference
 
-* Effective Modern C++: Prefer scoped enums to unscoped enums
+* Effective Modern C++: Item 10: Prefer scoped enums to unscoped enums
 * [C++ Core Guidelines: Prefer enumerations over macros](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Renum-macro)
 * [C++ Core Guidelines: Prefer class enums over "plain" enums](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Renum-class)
 

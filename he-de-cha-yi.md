@@ -26,7 +26,11 @@ A a{123, "haha"};
 
 ```cpp
 int x {7.9};   // error: narrowing
-int y = 7.9;   // OK: y becomes 7. Hope for a compiler warning
+int y = 7.9;   // BAD: y becomes 7. Hope for a compiler warning
+
+double x, y, z;
+int sum{ x + y + z };   // error
+int sum = x + y + z;    // BAD
 ```
 
 ##### Example, 搭配`auto`使用
@@ -38,6 +42,8 @@ auto x2 = {7};      // x2 is an initializer_list<int> with an element 7
 auto x11 {7, 8};    // error: two initializers
 auto x22 = {7, 8};  // x2 is an initializer_list<int> with elements 7 and 8
 ```
+
+
 
 ---
 

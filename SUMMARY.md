@@ -12,6 +12,6 @@
 * [使用 {} 初始化物件](he-de-cha-yi.md)
 * [使用 nullptr 取代 NULL](shi-yong-nullptr-qu-dai-null.md)
 * [使用 using 取代 typedef](shi-yong-using-qu-dai-typedef.md)
+* [Enum](enum.md)
 * [Constructors, Assignments, and Destructors](raii/constructor.md)
-* [Function](function.md)
 

@@ -10,11 +10,8 @@
 * [Named Cast](named-cast.md)
 * [auto](auto.md)
 * [使用 {} 初始化物件](he-de-cha-yi.md)
+* [使用 nullptr 取代 NULL](shi-yong-nullptr-qu-dai-null.md)
 * [Constructors, Assignments, and Destructors](raii/constructor.md)
 * [Function](function.md)
 * [OOP](oop.md)
-* [傳統 C 的迷思](chuan-tong-c-de-mi-si.md)
-  * [不要：宣告所有變數在 function 開頭](chuan-tong-c-de-mi-si/bu-yao-ff1a-xuan-gao-suo-you-bian-shu-zai-function-kai-tou.md)
-  * [不要：使用 goto end 來釋放資源](chuan-tong-c-de-mi-si/bu-yao-ff1a-shi-yong-goto-end-lai-shi-fang-zi-yuan.md)
-  * [不要：不使用 exception](chuan-tong-c-de-mi-si/bu-yao-ff1a-bu-shi-yong-exception.md)
 

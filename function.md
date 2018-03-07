@@ -95,7 +95,7 @@ Hello World!
 
 ---
 
-#### 回傳多的  output
+#### 回傳多個  output
 
 ##### Example, C++11 可以使用`tuple`
 

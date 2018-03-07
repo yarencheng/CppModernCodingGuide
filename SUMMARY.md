@@ -16,4 +16,5 @@
   * [使用 nullptr 取代 NULL](shi-yong-nullptr-qu-dai-null.md)
   * [使用 using 取代 typedef](shi-yong-using-qu-dai-typedef.md)
   * [Enum](enum.md)
+* [C 到 C++ 的迷思](c-dao-c-++-de-mi-si.md)
 

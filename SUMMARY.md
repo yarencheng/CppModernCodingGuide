@@ -14,4 +14,7 @@
 * [使用 using 取代 typedef](shi-yong-using-qu-dai-typedef.md)
 * [Enum](enum.md)
 * [Constructors, Assignments, and Destructors](raii/constructor.md)
+* [Function](/function.md)
+
+
 

@@ -8,6 +8,7 @@
   * [Thread](raii/thread.md)
   * [Legacy C code](raii/legacy-c-code.md)
 * [Named Cast](named-cast.md)
+* [其他](qi-ta.md)
 * [auto](auto.md)
 * [使用 {} 初始化物件](he-de-cha-yi.md)
 * [使用 nullptr 取代 NULL](shi-yong-nullptr-qu-dai-null.md)

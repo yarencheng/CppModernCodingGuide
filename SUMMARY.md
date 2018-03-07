@@ -9,6 +9,7 @@
   * [Legacy C code](raii/legacy-c-code.md)
 * [Constructors, Assignments, and Destructors](raii/constructor.md)
 * [Function](/function.md)
+* [OOP](/oop.md)
 * [其他](qi-ta.md)
   * [Named Cast](named-cast.md)
   * [auto](auto.md)

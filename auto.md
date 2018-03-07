@@ -68,6 +68,7 @@ void fn()
 
 * Effective Modern C++: Item 5: Prefer auto to explicit type declaration
 * Effective Modern C++: Item 6: Use the explicitly typed initializer idiom when auto deduces undesired types
+* [C++ Core Guidelines: Use auto to avoid redundant repetition of type names](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Res-auto)
 
 
 

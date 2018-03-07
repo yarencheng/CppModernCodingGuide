@@ -54,11 +54,11 @@ public:
 
 void fn()
 {
-    Proxy p = someThing();
-    
-    bool b = p;    // b = true
-    int i = p;     // i = 123
-    auto a = p     // a 的 type 是 Proxy
+    Proxy p = doSomeThing();
+
+    bool b = doSomeThing();    // b = true
+    int i = doSomeThing();     // i = 123
+    auto a = doSomeThing()     // a 的 type 是 Proxy
 }
 ```
 

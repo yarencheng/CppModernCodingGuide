@@ -355,6 +355,7 @@ aa
 * [C++ Core Guidelines: Don't define a default constructor that only initializes data members; use in-class member initializers instead](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c45-dont-define-a-default-constructor-that-only-initializes-data-members-use-in-class-member-initializers-instead)
 * [C++ Core Guidelines: A base class destructor should be either public and virtual, or protected and nonvirtual](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c35-a-base-class-destructor-should-be-either-public-and-virtual-or-protected-and-nonvirtual)
 * [C++ Core Guidelines: A base class should suppress copying, and provide a virtual`clone`instead if "copying" is desired](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c67-a-base-class-should-suppress-copying-and-provide-a-virtual-clone-instead-if-copying-is-desired)
+* Effective Modern C++: Item 17: Understand special member function generation
 
 
 

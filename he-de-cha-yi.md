@@ -56,7 +56,7 @@ auto x22 = {7, 8};  // x2 is an initializer_list<int> with elements 7 and 8
 #### Reference
 
 * [C++ Core Guidelines: Prefer the {} initializer syntax](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#es23-prefer-the--initializer-syntax)
-* Effective
+* Effective M
 
 
 

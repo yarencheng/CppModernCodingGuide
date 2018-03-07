@@ -1,7 +1,5 @@
 # OOP
 
-TBD
-
 ---
 
 #### 使用 pure abstract class 當作 interface
@@ -121,10 +119,6 @@ public:
     virtual void doSomething() { ... }; // BAD，有需要嗎？
 };
 ```
-
----
-
-ss
 
 ---
 

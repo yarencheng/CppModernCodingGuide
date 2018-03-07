@@ -43,9 +43,24 @@ b2           = 0
 
 原因是因為`std::vector::operator[]`回傳的是`std::vector::reference`，它是一個proxy class。
 
-TODO: 解釋
+Example, proxy class
 
+```cpp
+class Proxy{
+public:
+    operator bool() const { return true; };
+    operator int() const { return 123; };
+};
 
+void fn()
+{
+    Proxy p = someThing();
+    
+    bool b = p;    // b = true
+    int i = p;     // i = 123
+    auto a = p     // a 的 type 是 Proxy
+}
+```
 
 
 

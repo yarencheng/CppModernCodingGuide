@@ -66,6 +66,8 @@ void fn()
 
 #### Reference
 
-* 
+* Effective Modern C++: Item 5: Prefer auto to explicit type declaration
+* Effective Modern C++: Item 6: Use the explicitly typed initializer idiom when auto deduces undesired types
+
 
 

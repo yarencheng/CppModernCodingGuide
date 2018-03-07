@@ -341,10 +341,6 @@ void fn()
 
 ---
 
-aa
-
----
-
 #### Reference
 
 * [cppreference.com: The rule of three/five/zero](http://en.cppreference.com/w/cpp/language/rule_of_three)

@@ -225,10 +225,6 @@ void fn(shared_ptr<T>& t)
 
 ---
 
-TBD
-
----
-
 #### Reference
 
 * [Wiki: Smart Pointer](https://en.wikipedia.org/wiki/Smart_pointer)

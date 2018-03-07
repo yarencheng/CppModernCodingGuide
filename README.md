@@ -1,7 +1,5 @@
 [read this article on GitBook](https://yarencheng.gitbooks.io/c-modern-coding-guide/content/)
 
-# \[\[\[\[\[ TBD \]\]\]\]\]
-
 # C++ Modern Coding Guide
 
 這裡整理了關於 C++ 應該使用的觀念、技巧、或事相關的 std 含式庫，主要目標是避免繼續使用 legacy C，以及提升 C++ 的維護性、易閱讀性、測試性...等。除非有特別說明否則這裡說提到的任何東西一定都可以在 C++17 使用。

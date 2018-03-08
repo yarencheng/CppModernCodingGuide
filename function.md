@@ -133,8 +133,8 @@ void caller()
 {
     auto [ val1, val2 ] = callee();
 
-    cout << val1 << endl;
-    cout << val2 << endl;
+    cout << val1 << endl;  // A.i
+    cout << val2 << endl;  // A.b
 }
 ```
 

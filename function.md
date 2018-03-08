@@ -181,8 +181,6 @@ void fn()
     consume(std::move(o));
 
     // o 不可以再被使用
-
-    // After consume(), o is never used.
 }
 ```
 

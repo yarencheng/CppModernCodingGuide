@@ -224,7 +224,7 @@ public:
     ~Base () { // free something ... }
 };
 
-class Derived{
+class Derived: public Base {
 public:
     ~Derived () { // free something ... }
 };

@@ -1,0 +1,2 @@
+T\*  --&gt;  std::array
+

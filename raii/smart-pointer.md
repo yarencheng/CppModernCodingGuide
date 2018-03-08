@@ -180,7 +180,7 @@ void even_better(T& t)
 除非是以下情況，否則不應該使用 smart pointer 當作參數
 
 ```cpp
-// fn 要轉移指標擁有權的時候，fn 可能不使用 t
+// fn 要轉移指標擁有權的時候，fn 可能不會使用 t
 void fn(unique_ptr<T> t)
 {
     unique_ptr<T> another_t(std::move(t));
@@ -188,7 +188,7 @@ void fn(unique_ptr<T> t)
     ...
 }
 
-// 分享擁有關係，fn 可能不使用 t
+// 分享擁有關係，fn 可能不會使用 t
 void fn(shared_ptr<T> t)
 {
     shared_ptr<T> another_t = t;
@@ -196,7 +196,7 @@ void fn(shared_ptr<T> t)
     ...
 }
 
-// 重新指向另一個物件，fn 可能不使用 t
+// 重新指向另一個物件，fn 可能不會使用 t
 void fn(unique_ptr<T>& t)
 {
     t = make_unique<T>(...)
@@ -204,7 +204,7 @@ void fn(unique_ptr<T>& t)
     ...
 }
 
-// 重新指向另一個物件，fn 可能不使用 t
+// 重新指向另一個物件，fn 可能不會使用 t
 void fn(shared_ptr<T>& t)
 {
     t = shared_ptr<T>(...)

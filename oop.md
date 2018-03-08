@@ -15,7 +15,7 @@ class A {    // abstract class
     void fn2();
 };
 
-class B {    // abstract class
+class B {    // pure abstract class
     virtual void fn1() = 0;
     virtual void fn2() = 0;
 };

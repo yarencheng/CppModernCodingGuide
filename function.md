@@ -15,7 +15,24 @@ void not_throw() noexcept
 }
 ```
 
+參考`stl_vector.h`
 
+```cpp
+// Do move assignment when it might not be possible to move source
+// object's memory, resulting in a linear-time operation.
+void _M_move_assign(vector&& __x, std::false_type)
+{
+    if (__x._M_get_Tp_allocator() == this->_M_get_Tp_allocator())
+        _M_move_assign(std::move(__x), std::true_type());
+    else {
+        // The rvalue's allocator cannot be moved and is not equal,
+        // so we need to individually move each element.
+        this->assign(std::__make_move_if_noexcept_iterator(__x.begin()),
+                     std::__make_move_if_noexcept_iterator(__x.end()));
+        __x.clear();
+    }
+ }
+```
 
 ---
 

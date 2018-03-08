@@ -30,6 +30,36 @@ public:
 };
 ```
 
+##### Example, T\(\) 到底是變數還是 function
+
+```cpp
+int a();        // function
+int b(123);     // variable
+int c{};        // variable
+int d{123};     // variable
+
+cout << "a = " << a << " " << typeid(a).name() << endl;
+cout << "b = " << b << " " << typeid(b).name() << endl;
+cout << "c = " << c << " " << typeid(c).name() << endl;
+cout << "d = " << d << " " << typeid(d).name() << endl;
+
+
+執行結果
+a = 1   FivE
+b = 123 i
+c = 0   i
+d = 123 i
+
+=================
+
+class T { ... };
+
+T a();        // variable or function ?
+T b(123);     // variable
+T c{};        // variable
+T d{123};     // variable
+```
+
 ##### Example, `{}`不允許 narrowing conversions
 
 ```cpp

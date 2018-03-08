@@ -6,7 +6,7 @@
 
 #### 如果不會丟出`excception`，宣告成`noexcept`
 
-如果一個 function 宣告成`noexcept`，編譯器會針對它作最佳化，所以如果確定一個 function 不會丟出`exception`，或是它是一個 C style 的 function 請宣告成`noexcept`。
+如果一個 function 宣告成`noexcept`，compile time 會針對`noexcept`作不同的事情，所以如果確定一個 function 不會丟出`exception`，或是它是一個 C style 的 function 請宣告成`noexcept`。
 
 ```cpp
 void not_throw() noexcept
@@ -14,6 +14,8 @@ void not_throw() noexcept
     ...
 }
 ```
+
+
 
 ---
 
@@ -194,6 +196,7 @@ void fn()
 * [C++ Core Guidelines: To return multiple "out" values, prefer returning a tuple or struct](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rf-out-multi)
 * [cppreference.com: Copy elision](http://en.cppreference.com/w/cpp/language/copy_elision)
 * [stackoverFlow: What are copy elision and return value optimization?](https://stackoverflow.com/questions/12953127/what-are-copy-elision-and-return-value-optimization)
+* [stackoverflow: std::move\_if\_noexcept](https://stackoverflow.com/questions/15457711/noexcept-specifier-and-compiler-optimizations)
 
 
 

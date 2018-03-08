@@ -7,7 +7,7 @@
 #### 使用 unique\_ptr 取代 T\*
 
 ```cpp
-void bad_example()
+void bad()
 {
     T* t = new T(); // bad
 
@@ -18,7 +18,7 @@ void bad_example()
     // ...
 }
 
-void good_example()
+void good()
 {
     unique_ptr<T> t = unique_ptr<T>(new T()); // good
 

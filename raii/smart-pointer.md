@@ -122,7 +122,7 @@ void bad()
   // 同理 b 執行 deconstructor 的時候發現 B 的 use count = 1，不 delete B
 ```
 
-改用`weak_ptr`雖然還是有循環\(cycles\)但是不會 leak
+改用`weak_ptr`
 
 ```cpp
 class A {

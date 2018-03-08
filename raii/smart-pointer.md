@@ -50,10 +50,10 @@ auto q = make_unique<Foo>(7);     // 比較好
 // 4. unique_ptr 執行 constructor
 //
 // 如果 bar() 丟出 exception，Foo 的 destructor 將不會被執行，導致leak
-f(unique_ptr<Foo>(new Foo()), bar());
+fn(unique_ptr<Foo>(new Foo()), bar());
 
 // Exception-safe
-f(make_unique<Foo>(), bar());
+fn(make_unique<Foo>(), bar());
 ```
 
 ---
